@@ -100,7 +100,38 @@ PART_AUTOFILLS = {
         'Part Number'   : 'LP2950ACDT-3.3RG',
         'Description'   : 'IC REG LINEAR 3.3V 100MA DPAK-3',
         'Package'       : 'DPAK-3'
+    },
+    'Mini50 12Pin Vertical':{
+        'Manufacturer'  : 'Molex, LLC',
+        'Part Number'   : '0348250124',
+        'Description'   : 'MINI50 VHDR 12CKT BLK POL A',
+        'Package'       : '.' 
+    },
+    'Minifit Jr 2Pin PCB':{
+        'Manufacturer'  : 'Molex, LLC',
+        'Part Number'   : '0353170220',
+        'Description'   : 'CONN HEADER 2POS VERT WHITE',
+        'Package'       : '.' 
+    },
+    'Minifit Jr 4Pin PCB':{
+        'Manufacturer'  : 'Molex, LLC',
+        'Part Number'   : '0353170420',
+        'Description'   : 'CONN HEADER 4POS VERT WHITE',
+        'Package'       : '.' 
+    },
+    'Minifit Jr 8Pin PCB':{
+        'Manufacturer'  : 'Molex, LLC',
+        'Part Number'   : '0039293086',
+        'Description'   : 'CONN HEADER 8POS VERT WHITE',
+        'Package'       : '.' 
+    },
+    'LTV-817*':{
+        'Manufacturer'  : 'Lite-On Inc.',
+        'Part Number'   : 'LTV-817S',
+        'Description'   : 'OPTOISOLATR 5KV TRANSISTOR 4-SMD',
+        'Package'       : '.' 
     }
+    
 
 }
 
