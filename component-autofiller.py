@@ -342,15 +342,15 @@ def process_component_block(block_text):
     # Figure out this component's footprint name to see if it's something
     # that we can autofill
     component_footprint = get_field(block_text, 'footprint')
-	
-	if component_footprint is None:
-		component_footprint = ''
+
+    if component_footprint is None:
+    	component_footprint = ''
 
     # Figure out this component's value
     component_value = get_field(block_text, 'value')
-	
-	if component_value is None:
-		component_value = ''
+
+    if component_value is None:
+        component_value = ''
 
     print('Type: ' + Fore.CYAN + '{}'.format(component_name) + Style.RESET_ALL)
     print('Value: ' + Fore.CYAN + '{}'.format(component_value) + Style.RESET_ALL)
