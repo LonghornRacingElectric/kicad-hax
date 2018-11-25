@@ -130,6 +130,24 @@ PART_AUTOFILLS = {
         'Part Number'   : 'LTV-817S',
         'Description'   : 'OPTOISOLATR 5KV TRANSISTOR 4-SMD',
         'Package'       : '.' 
+    },
+    'MCP9700':{
+        'Manufacturer'  : 'Microchip Technology',
+        'Part Number'   : 'MCP9700-E/TO',
+        'Description'   : 'SENSOR TEMP ANLG VOLT TO-92-3',
+        'Package'       : 'TO-92' 
+    },
+    '4052':{
+        'Manufacturer'  : 'Nexperia USA Inc.',
+        'Part Number'   : '74HC4052PW,118',
+        'Description'   : 'IC MUX/DEMUX DUAL 4X1 16TSSOP',
+        'Package'       : '16-TSSOP' 
+    },
+    '500 mA':{
+        'Manufacturer' : 'Bel Fuse Inc.',
+        'Part Number' : 'C1Q 500',
+        'Description' : 'FUSE BRD MNT 500MA 125VAC 63VDC',
+        'Package' : '1206'
     }
     
 
@@ -162,7 +180,7 @@ def digikey_find_part(part_number):
 
 # returns a regex match object
 def parse_field_line(field_line):
-    FIELD_REGEX = 'F +(?P<number>[0-9]+) +"(?P<value>.+)" +[HV] +[0-9]+ +[0-9]+ +[0-9]+ +[0-9]+ +[A-Z]+ +[A-Z]+( +"(?P<name>[A-Za-z0-9 ]+)")?'
+    FIELD_REGEX = 'F +(?P<number>[0-9]+) +"(?P<value>.+)" +[HV] +-?[0-9]+ +-?[0-9]+ +-?[0-9]+ +-?[0-9]+ +[A-Z]+ +[A-Z]+( +"(?P<name>[A-Za-z0-9 ]+)")?'
     m = re.match(FIELD_REGEX, field_line)
     return m
 
@@ -226,8 +244,9 @@ def set_field(block, field_name, field_value):
     else:
         # Field exists already, we need to modify it
         # Replace the value by finding the first instance of a quoted string
-        field_line = block[idx]
-        field_line = re.sub('".*"', '"{}"'.format(field_value), field_line)
+        old_field = parse_field_line(block[idx])
+        num = old_field.group('number')
+        field_line = 'F {} "{}" V 4800 3050 60  0001 C CNN "{}"'.format(num, field_value, field_name)
         block[idx] = field_line
 
     return block
@@ -245,7 +264,7 @@ def figure_out_description(component_name, component_footprint, component_value)
     }
 
     # Resistors!
-    if component_name in ['R', 'R_Small']:
+    if component_name in ['R', 'R_Small', 'Device:R', 'Device:R_Small']:
         # Accepted forms of component values:
         # 10
         # 10k
@@ -275,7 +294,7 @@ def figure_out_description(component_name, component_footprint, component_value)
         output['Package'] = res_size
 
     # Capacitors!
-    elif component_name in ['C', 'C_Small']:
+    elif component_name in ['C', 'C_Small', 'Device:C', 'Device:C_Small']:
 
         cap_size = '0603'
 
@@ -406,7 +425,7 @@ def autofill_sch_file(sch_file_text):
     lines = sch_file_text.splitlines()
     out = ''
 
-    if lines[0] != 'EESchema Schematic File Version 2':
+    if lines[0] != 'EESchema Schematic File Version 4':
         print('Unknown .sch file header: {}'.format(lines[0]))
         os.exit(1)
 

@@ -11,16 +11,16 @@ import sys
 
 
 # ---- Customize this for your particular BOM template ----
-SPREADSHEET_START_ROW = 3
+SPREADSHEET_START_ROW = 6
 SPREADSHEET_COLS = {
-    'Ref'           : 'B',
-    'Qty'           : 'C',
-    'Value'         : 'D',
-    'Manufacturer'  : 'E',
-    'Part Number'   : 'F',
-    'Description'   : 'G',
-    'Package'       : 'H',
-    'Notes'         : 'I'
+    'Ref'           : 'A',
+    'Qty'           : 'B',
+    'Value'         : 'C',
+    'Manufacturer'  : 'D',
+    'Part Number'   : 'E',
+    'Description'   : 'F',
+    'Package'       : 'G',
+    'Notes'         : 'H'
 }
 TEMPLATE_FILENAME = 'PCB BOM Template.xlsx'
 # ---------------------------------------------------------
